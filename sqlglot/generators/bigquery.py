@@ -400,6 +400,7 @@ class BigQueryGenerator(generator.Generator):
         exp.Values: _derived_table_values_to_unnest,
         exp.VariancePop: rename_func("VAR_POP"),
         exp.SafeDivide: rename_func("SAFE_DIVIDE"),
+        exp.QuantileBucket: lambda self, e: f"NTILE({self.sql(e, 'buckets')}) OVER (ORDER BY {self.sql(e, 'this')})",
     }
 
     SUPPORTED_JSON_PATH_PARTS = {

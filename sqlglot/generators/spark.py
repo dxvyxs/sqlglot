@@ -140,6 +140,7 @@ class SparkGenerator(Spark2Generator):
             exp.TryCast: lambda self, e: (
                 self.trycast_sql(e) if e.args.get("safe") else self.cast_sql(e)
             ),
+            exp.QuantileBucket: lambda self, e: f"NTILE({self.sql(e, 'buckets')}) OVER (ORDER BY {self.sql(e, 'this')})",
             exp.AnyValue: None,
             exp.DateDiff: None,
             exp.With: None,

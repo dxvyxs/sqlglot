@@ -548,3 +548,6 @@ class WidthBucket(Expression, Func):
 
 class Zipf(Expression, Func):
     arg_types = {"this": True, "elementcount": True, "gen": True}
+
+class QuantileBucket(Expression, Func):
+    arg_types = {"this": True, "buckets": True}

@@ -117,6 +117,7 @@ class HiveParser(parser.Parser):
             args or [exp.CurrentTimestamp()], dialect
         ),
         "YEAR": lambda args: exp.Year(this=exp.TsOrDsToDate.from_arg_list(args)),
+        "QUANTILE_BUCKET": exp.QuantileBucket.from_arg_list,
     }
 
     NO_PAREN_FUNCTION_PARSERS = {

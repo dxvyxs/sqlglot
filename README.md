@@ -646,3 +646,15 @@ transpile("SELECT * FROM t", read="mydb", write="postgres")
 ```
 
 See the [Custom Dialects](#custom-dialects) section for implementation details.
+
+# Adding QUANTILE_BUCKET to SQLglot
+
+## Files Modified
+
+- `sqlglot/expressions/functions.py` — Added the `QuantileBucket` class. 
+
+- `sqlglot/parsers/hive.py` — Registered `"QUANTILE_BUCKET"` in the Hive parser's FUNCTIONS dictionary. 
+
+- `sqlglot/generators/spark.py` — Added a TRANSFORMS entry to emit `NTILE(n) OVER (ORDER BY col)` when writing Spark SQL, since Spark has no native QUANTILE_BUCKET.
+
+- `sqlglot/generators/bigquery.py` — Same override as Spark for the same reason.
